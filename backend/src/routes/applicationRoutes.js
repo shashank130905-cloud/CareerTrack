@@ -1,0 +1,1 @@
+import {Router} from 'express';import {submitApplication} from '../controllers/applicationController.js';import {resumeUpload} from '../middleware/upload.js';const r=Router();r.post('/:jobId',resumeUpload.single('resume'),submitApplication);export default r;

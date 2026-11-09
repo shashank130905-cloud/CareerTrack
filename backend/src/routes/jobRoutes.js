@@ -1,0 +1,1 @@
+import {Router} from 'express';import {listJobs,getJob} from '../controllers/jobController.js';const r=Router();r.get('/',listJobs);r.get('/:id',getJob);export default r;

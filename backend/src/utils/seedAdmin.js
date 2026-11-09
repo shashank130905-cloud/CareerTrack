@@ -1,0 +1,4 @@
+import 'dotenv/config';import mongoose from 'mongoose';import bcrypt from 'bcryptjs';import Admin from '../models/Admin.js';
+await mongoose.connect(process.env.MONGO_URI);const email=process.env.ADMIN_EMAIL,name=process.env.ADMIN_NAME||'CareerTrack Admin',password=process.env.ADMIN_PASSWORD;
+if(!email||!password||password.length<12){console.error('Set ADMIN_EMAIL and ADMIN_PASSWORD (at least 12 characters) in .env');process.exit(1)}
+const passwordHash=await bcrypt.hash(password,12);await Admin.findOneAndUpdate({email:email.toLowerCase()},{name,email:email.toLowerCase(),passwordHash},{upsert:true,new:true,setDefaultsOnInsert:true});console.log(`Admin ready: ${email}`);await mongoose.disconnect();
